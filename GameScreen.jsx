@@ -9,11 +9,17 @@ export default function GameScreen({ route, navigation }) {
 
     const [listNumbers, setListNumbers] = useState([]);
     const [numero, setNumero] = useState(0);
-    
+
+    const [mayor10, setMayor10] = useState(false);
+
     const handleNumber = (event) => {
         if(numero.toString().length === 4 && listNumbers.length < 10)
         {
             setListNumbers(listNumbers.concat(numero))
+            if(numero==numeroOculto){
+                setMayor10(!mayor10);
+                ToastAndroid.show('GANO!', ToastAndroid.LONG);
+            }
         }
         else if (numero.toString().length != 4)
         {
@@ -22,6 +28,7 @@ export default function GameScreen({ route, navigation }) {
         else 
         {
             ToastAndroid.show('No puede ingresar mas numeros! PERDIO', ToastAndroid.LONG);
+            setMayor10(!mayor10);
         }
     }
 
@@ -29,8 +36,8 @@ export default function GameScreen({ route, navigation }) {
 
         <View style={{flex: 1, justifyContent: 'center'}}>
             <Text>Bienvenido: {nombre}</Text>
-            <Text>Nro. Secreto: {numeroOculto}</Text>
-        
+            {mayor10 ? <Text>Nro. Secreto: {numeroOculto}</Text>:<Text>Nro. Secreto:</Text>}
+
             <NumbersScreen  listNumbers={listNumbers} />
 
             <View style={styles.row}>
@@ -40,8 +47,9 @@ export default function GameScreen({ route, navigation }) {
                     onChangeText={numero => setNumero(numero)}
                 />
                 <Button 
-                    title="SEND"
+                    title="INGRESAR"
                     onPress={handleNumber}
+                    disabled={mayor10}
                 />
             </View>
       </View>

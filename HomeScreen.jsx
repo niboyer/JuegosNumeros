@@ -3,16 +3,16 @@ import { StyleSheet, View, Text, TextInput, Switch, Button } from 'react-native'
 
 
 export default function HomeScreen({ navigation }) {
-    const [nombre, setNombre] = useState('extraño');
+    const [nombre, setNombre] = useState('Extraño');
     const [isEnabled, setIsEnabled] = useState(false);
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const handleStart = () => {
 
-        var numeroOculto = 0;
-        if(isEnabled){
+        var numeroOculto = Math.floor(1000 + Math.random() * 9000);
+        /* if(isEnabled){
             numeroOculto = Math.floor(1000 + Math.random() * 9000);
-        }
+        } */
 
         navigation.navigate('GameScreen', {
             nombre: nombre,
@@ -37,9 +37,10 @@ export default function HomeScreen({ navigation }) {
             onValueChange={toggleSwitch}
             value={isEnabled}
         />
-        <Button 
-        title="COMENZAR"
-        onPress={handleStart}
+        <Button
+          title="COMENZAR"
+          onPress={handleStart}
+          color='#79B36B'
       />
       </View>
     );
@@ -56,9 +57,13 @@ export default function HomeScreen({ navigation }) {
       borderWidth: 1,
       padding: 10,
       marginBottom: 50,
+      backgroundColor:'#79B36B',
+      textAlign: 'center',
+      color: 'white'
     },
     text:{
         fontSize: 34,
         marginBottom: 50,
+        color: '#53B839'
     },
   });
