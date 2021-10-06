@@ -1,24 +1,20 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 
-export default function NumbersScreen({listNumbers, numeroSecreto}) {
-
-    const bien = 0;
-    const regular = 0;
-    const mal = 0;
+export default function NumbersScreen({listNumbers}) {
 
     return(
         <View  style={styles.container}>
             {listNumbers.map(n =>                 
                 <View style={styles.numeros}>
                     <Text>Su numero: </Text>
-                    <Text style={styles.num}>{n} - </Text>
+                    <Text style={styles.num}>{n.numero} - </Text>
                     <Text>Resultado: </Text>
-                    <Text style={styles.num}> {bien}</Text>
+                    <Text style={styles.num}> {n.bien}</Text>
                     <Text style={styles.bien}> B</Text>
-                    <Text style={styles.num}> {regular}</Text>
+                    <Text style={styles.num}> {n.regular}</Text>
                     <Text style={styles.regular}> R</Text>
-                    <Text style={styles.num}> {mal}</Text>
+                    <Text style={styles.num}> {n.mal}</Text>
                     <Text style={styles.mal}> M</Text>
                 </View>
             )}

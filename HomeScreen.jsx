@@ -7,12 +7,17 @@ export default function HomeScreen({ navigation }) {
     const [isEnabled, setIsEnabled] = useState(false);
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    const handleStart = () => {
 
+    const handleStart = () => {
         var numeroOculto = Math.floor(1000 + Math.random() * 9000);
-        /* if(isEnabled){
+
+        if(isEnabled){
             numeroOculto = Math.floor(1000 + Math.random() * 9000);
-        } */
+        } else{
+            numeroOculto = getRndInteger(1000,9999);
+        }
+
+        console.log(numeroOculto)
 
         navigation.navigate('GameScreen', {
             nombre: nombre,
@@ -67,3 +72,19 @@ export default function HomeScreen({ navigation }) {
         color: '#53B839'
     },
   });
+
+  function getRndInteger(min, max) {
+    let valor = Math.floor(Math.random() * (max - min + 1) ) + min;
+    const a = valor.toString();
+    if(a[0]==a[1]||a[0]==a[2]||a[0]==a[3]||a[1]==a[2]||a[1]==a[3]||a[2]==a[3]){
+      let salir = 0;
+      while (salir == 0 ){
+        valor = Math.floor(Math.random() * (max - min + 1) ) + min;
+        const a = valor.toString();
+        if(a[0]!=a[1]&&a[0]!=a[2]&&a[0]!=a[3]&&a[1]!=a[2]&&a[1]!=a[3]&&a[2]!=a[3]){
+          salir=1;
+        }
+      }
+    }
+    return valor.toString();
+  }

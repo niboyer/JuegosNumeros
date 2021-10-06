@@ -15,7 +15,18 @@ export default function GameScreen({ route, navigation }) {
     const handleNumber = (event) => {
         if(numero.toString().length === 4 && listNumbers.length < 10)
         {
-            setListNumbers(listNumbers.concat(numero))
+            let nuevoNumero = {
+                numero: numero,
+                bien: 0,
+                regular: 0,
+                mal: 0
+            }   
+
+            nuevoNumero.bien = getBien(nuevoNumero.numero, numeroOculto)
+            nuevoNumero.regular = getRegular(nuevoNumero.numero, numeroOculto)
+
+            setListNumbers(listNumbers.concat(nuevoNumero))
+            
             if(numero==numeroOculto){
                 setMayor10(!mayor10);
                 ToastAndroid.show('GANO!', ToastAndroid.LONG);
@@ -79,3 +90,25 @@ export default function GameScreen({ route, navigation }) {
         alignItems: "center",
       },
   });
+
+  function getBien(numero, numeroOculto){
+      let bien = 0;
+     for(let i=0; i<4; i++){
+         if(numero.toString()[i] === numeroOculto.toString()[i]){
+             bien = bien + 1;
+         }
+     }
+     return bien;
+  };
+
+  function getRegular(numero, numeroOculto){
+    let regular = 0;
+    for(let i=0; i<4; i++){
+        for(let j=0; j<4; j++){
+            if(numero.toString()[i] === numeroOculto.toString()[j] && i != j){
+                regular = regular + 1;
+            }
+        }
+    }
+    return regular;
+};
