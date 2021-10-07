@@ -6,6 +6,7 @@ import NumbersScreen from './NumbersScreen';
 export default function GameScreen({ route, navigation }) {
     const { nombre } = route.params;
     const { numeroOculto } = route.params;
+    const { isEnabled } = route.params;
 
     const [listNumbers, setListNumbers] = useState([]);
     const [numero, setNumero] = useState(0);
@@ -22,7 +23,13 @@ export default function GameScreen({ route, navigation }) {
                 mal: 0
             }   
 
-            nuevoNumero = comprobar(numeroOculto, nuevoNumero);
+            if(isEnabled==true){
+                nuevoNumero = comprobarRep(numeroOculto, nuevoNumero);
+            }
+            else{
+                nuevoNumero = comprobar(numeroOculto, nuevoNumero);
+            }
+            
 
             setListNumbers(listNumbers.concat(nuevoNumero))
             
@@ -139,5 +146,144 @@ export default function GameScreen({ route, navigation }) {
         }
     }
 
+    return numeroNuevo;
+  }
+
+
+
+
+
+  function comprobarRep(numeroOculto,numeroNuevo){
+    var contador = 0;
+
+    if(numeroNuevo.numero.toString()[0]==numeroOculto.toString()[0]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+      if(numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[3]){
+        numeroNuevo.mal = numeroNuevo.mal + 1;
+      }
+      else{
+        if(numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[3]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+            if(numeroNuevo.numero.toString()[0]==numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[1]){
+              contador = contador + 1;
+            }
+            if(numeroNuevo.numero.toString()[0]==numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[2]){
+              contador = contador + 1;
+            }
+            if(numeroNuevo.numero.toString()[0]==numeroOculto.toString()[3]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[3]){
+              contador = contador + 1;
+            }
+            if(contador>=1){
+                numeroNuevo.regular = numeroNuevo.regular + 1;
+            }
+            else{
+                numeroNuevo.mal = numeroNuevo.mal + 1;
+            }
+          } 
+        }
+      }
+  
+  
+  
+  
+    if(numeroNuevo.numero.toString()[1]==numeroOculto.toString()[1]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+      if(numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[3]){
+        numeroNuevo.mal = numeroNuevo.mal + 1;
+      }
+      else{
+        if(numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[3]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+          if(numeroNuevo.numero.toString()[1]==numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[0]){
+            contador = contador + 1;
+          }
+          if(numeroNuevo.numero.toString()[1]==numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[2]){
+            contador = contador + 1;
+          }
+          if(numeroNuevo.numero.toString()[1]==numeroOculto.toString()[3]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[3]){
+            contador = contador + 1;
+          }
+          if(contador>=1){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+          }
+          else{
+            numeroNuevo.mal = numeroNuevo.mal + 1;
+          }
+        } 
+      }
+    }
+  
+  
+  
+    if(numeroNuevo.numero.toString()[2]==numeroOculto.toString()[2]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+      if(numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[3]){
+        numeroNuevo.mal = numeroNuevo.mal + 1;
+      }
+      else{
+        if(numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[3]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+          if(numeroNuevo.numero.toString()[2]==numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[0]){
+            contador = contador + 1;
+          }
+          if(numeroNuevo.numero.toString()[2]==numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[1]){
+            contador = contador + 1;
+          }
+          if(numeroNuevo.numero.toString()[2]==numeroOculto.toString()[3]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[3]){
+            contador = contador + 1;
+          }
+          if(contador>=1){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+          }
+          else{
+            numeroNuevo.mal = numeroNuevo.mal + 1;
+          }
+        } 
+      }
+    }
+  
+  
+    if(numeroNuevo.numero.toString()[3]==numeroOculto.toString()[3]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+      if(numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[3]!=numeroOculto.toString()[2]){
+        numeroNuevo.mal = numeroNuevo.mal + 1;
+      }
+      else{
+        if(numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[2]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+          if(numeroNuevo.numero.toString()[3]==numeroOculto.toString()[0]&&numeroNuevo.numero.toString()[0]!=numeroOculto.toString()[0]){
+            contador = contador + 1;
+          }
+          if(numeroNuevo.numero.toString()[3]==numeroOculto.toString()[1]&&numeroNuevo.numero.toString()[1]!=numeroOculto.toString()[1]){
+            contador = contador + 1;
+          }
+          if(numeroNuevo.numero.toString()[3]==numeroOculto.toString()[2]&&numeroNuevo.numero.toString()[2]!=numeroOculto.toString()[2]){
+            contador = contador + 1;
+          }
+          if(contador>=1){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+          }
+          else{
+            numeroNuevo.mal = numeroNuevo.mal + 1;
+          }
+        } 
+      }
+    }
     return numeroNuevo;
   }

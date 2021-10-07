@@ -22,6 +22,7 @@ export default function HomeScreen({ navigation }) {
         navigation.navigate('GameScreen', {
             nombre: nombre,
             numeroOculto: numeroOculto,
+            isEnabled: isEnabled,
           });
     }
 
