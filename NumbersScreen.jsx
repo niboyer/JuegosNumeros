@@ -1,23 +1,25 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, ScrollView } from 'react-native';
 
 export default function NumbersScreen({listNumbers}) {
 
     return(
         <View  style={styles.container}>
-            {listNumbers.map(n =>                 
-                <View style={styles.numeros}>
-                    <Text>Su numero: </Text>
-                    <Text style={styles.num}>{n.numero} - </Text>
-                    <Text>Resultado: </Text>
-                    <Text style={styles.num}> {n.bien}</Text>
-                    <Text style={styles.bien}> B</Text>
-                    <Text style={styles.num}> {n.regular}</Text>
-                    <Text style={styles.regular}> R</Text>
-                    <Text style={styles.num}> {n.mal}</Text>
-                    <Text style={styles.mal}> M</Text>
-                </View>
-            )}
+            <ScrollView style={styles.scrollView}>
+                {listNumbers.map(n =>                 
+                    <View style={styles.numeros}>
+                        <Text>Su numero: </Text>
+                        <Text style={styles.num}>{n.numero} - </Text>
+                        <Text>Resultado: </Text>
+                        <Text style={styles.num}> {n.bien}</Text>
+                        <Text style={styles.bien}> B</Text>
+                        <Text style={styles.num}> {n.regular}</Text>
+                        <Text style={styles.regular}> R</Text>
+                        <Text style={styles.num}> {n.mal}</Text>
+                        <Text style={styles.mal}> M</Text>
+                    </View>
+                )}
+            </ScrollView>
         </View>
     );
 }
@@ -27,8 +29,16 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'center',      
     },
+    scrollView: {
+        backgroundColor: 'lightgrey',
+        marginHorizontal: 20,
+        borderRadius: 10,
+        padding: 5,
+        marginTop:15,
+        marginBottom:15,
+      },
     num : {
         fontSize: 20,
     },
@@ -53,8 +63,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 1,
+        borderColor: 'green',
         marginBottom: 5,
         padding: 5,
+        borderRadius: 10,
+        backgroundColor: 'white'
       },
     input:{
       borderWidth: 1,

@@ -12,7 +12,7 @@ export default function GameScreen({ route, navigation }) {
 
     const [mayor10, setMayor10] = useState(false);
 
-    const handleNumber = (event) => {
+    const handleNumber = () => {
         if(numero.toString().length === 4 && listNumbers.length < 10)
         {
             let nuevoNumero = {
@@ -22,8 +22,7 @@ export default function GameScreen({ route, navigation }) {
                 mal: 0
             }   
 
-            nuevoNumero.bien = getBien(nuevoNumero.numero, numeroOculto)
-            nuevoNumero.regular = getRegular(nuevoNumero.numero, numeroOculto)
+            nuevoNumero = comprobar(numeroOculto, nuevoNumero);
 
             setListNumbers(listNumbers.concat(nuevoNumero))
             
@@ -46,8 +45,8 @@ export default function GameScreen({ route, navigation }) {
     return (
 
         <View style={{flex: 1, justifyContent: 'center'}}>
-            <Text>Bienvenido: {nombre}</Text>
-            {mayor10 ? <Text>Nro. Secreto: {numeroOculto}</Text>:<Text>Nro. Secreto:</Text>}
+            <Text style={{padding:5, fontSize:20}}>Bienvenido: {nombre}</Text>
+            {mayor10 ? <Text style={{padding:5, fontSize:20}}>Nro. Secreto: {numeroOculto}</Text>:<Text style={{padding:5, fontSize:20}}>Nro. Secreto:</Text>}
 
             <NumbersScreen  listNumbers={listNumbers} />
 
@@ -57,7 +56,7 @@ export default function GameScreen({ route, navigation }) {
                     placeholder="Ingrese su numero"
                     onChangeText={numero => setNumero(numero)}
                 />
-                <Button 
+                <Button
                     title="INGRESAR"
                     onPress={handleNumber}
                     disabled={mayor10}
@@ -91,24 +90,54 @@ export default function GameScreen({ route, navigation }) {
       },
   });
 
-  function getBien(numero, numeroOculto){
-      let bien = 0;
-     for(let i=0; i<4; i++){
-         if(numero.toString()[i] === numeroOculto.toString()[i]){
-             bien = bien + 1;
-         }
-     }
-     return bien;
-  };
+  function comprobar(numeroOculto, numeroNuevo){
+    
+    if(numeroNuevo.numero.toString()[0] == numeroOculto.toString()[0]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else if(numeroNuevo.numero.toString()[0] == numeroOculto.toString()[1] || numeroNuevo.numero.toString()[0] == numeroOculto.toString()[2] || numeroNuevo.numero.toString()[0]==numeroOculto.toString()[3]){
+        numeroNuevo.regular = numeroNuevo.regular + 1;
+    }
+    else{
+        numeroNuevo.mal = numeroNuevo.mal + 1;
+    }
+    
 
-  function getRegular(numero, numeroOculto){
-    let regular = 0;
-    for(let i=0; i<4; i++){
-        for(let j=0; j<4; j++){
-            if(numero.toString()[i] === numeroOculto.toString()[j] && i != j){
-                regular = regular + 1;
-            }
+    if(numeroNuevo.numero.toString()[1] == numeroOculto.toString()[1]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+        if(numeroNuevo.numero.toString()[1] == numeroOculto.toString()[0] || numeroNuevo.numero.toString()[1] == numeroOculto.toString()[2] || numeroNuevo.numero.toString()[1] == numeroOculto.toString()[3]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+            numeroNuevo.mal = numeroNuevo.mal + 1;
         }
     }
-    return regular;
-};
+
+    if(numeroNuevo.numero.toString()[2] == numeroOculto.toString()[2]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+        if(numeroNuevo.numero.toString()[2] == numeroOculto.toString()[0] || numeroNuevo.numero.toString()[2] == numeroOculto.toString()[1] || numeroNuevo.numero.toString()[2] == numeroOculto.toString()[3]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+            numeroNuevo.mal = numeroNuevo.mal + 1;
+        }
+    }
+
+    if(numeroNuevo.numero.toString()[3] == numeroOculto.toString()[3]){
+        numeroNuevo.bien = numeroNuevo.bien + 1;
+    }
+    else{
+        if(numeroNuevo.numero.toString()[3] == numeroOculto.toString()[0] || numeroNuevo.numero.toString()[3] == numeroOculto.toString()[1] || numeroNuevo.numero.toString()[3] == numeroOculto.toString()[2]){
+            numeroNuevo.regular = numeroNuevo.regular + 1;
+        }
+        else{
+            numeroNuevo.mal = numeroNuevo.mal + 1;
+        }
+    }
+
+    return numeroNuevo;
+  }
